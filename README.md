@@ -36,17 +36,22 @@ A: Place down a sign and write `[repair]` in first line and write `hand` or `all
 |Create a Sign|`~`|`repair.sign.create`|`op`|
 |Break a Sign|`~`|`repair.sign.break`|`op`|
 <br />
+
 **NOTE: Remember to also add `repair.command.use` permission also if you want to allow a player to use the `/repair` command.**
+
 ### Info:
   - Make sure to subscribe to be updated for when i release more stuff on my [YT](https://youtu.be/x_mc-ocrdDU) channel.
   - Support is appreciated.
   - Please don't hesitate to ask questions or report bug report in issues section.
 ### Disclaimer:
-```YouTubers are not at all allowed to showcase this plugin in their videos.
+
+```
+YouTubers are not at all allowed to showcase this plugin in their videos.
 If found doing so I will copyright claim your videos there and then.
 
 This software is licensed under "GNU General Public License v3.0".
 This license allows you to use it and/or modify it but you are not at
 all allowed to sell this plugin at any cost. If found doing so the
 necessary action required would be taken. Further removal of the License and or
-authors name from this software is strictly prohibited.```
+authors name from this software is strictly prohibited.
+```
