@@ -1,4 +1,5 @@
-<img src="https://github.com/JackMD/Repair/blob/master/meta/Repair.png" width="48">
+<img src="https://github.com/JackMD/Repair/blob/master/meta/Repair.png" width="150" height= "150">
+
 # Repair
 
 | HitCount | License | Poggit |
@@ -41,13 +42,11 @@ A: Place down a sign and write `[repair]` in first line and write `hand` or `all
   - Support is appreciated.
   - Please don't hesitate to ask questions or report bug report in issues section.
 ### Disclaimer:
-```
-YouTubers are not at all allowed to showcase this plugin in their videos.
+```YouTubers are not at all allowed to showcase this plugin in their videos.
 If found doing so I will copyright claim your videos there and then.
 
 This software is licensed under "GNU General Public License v3.0".
 This license allows you to use it and/or modify it but you are not at
 all allowed to sell this plugin at any cost. If found doing so the
 necessary action required would be taken. Further removal of the License and or
-authors name from this software is strictly prohibited.
-```
+authors name from this software is strictly prohibited.```
