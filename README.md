@@ -1,4 +1,4 @@
-![Repair Banner](https://github.com/JackMD/Repair/blob/master/meta/Repair.png)
+<img src="https://github.com/JackMD/Repair/blob/master/meta/Repair.png" width="48">
 # Repair
 
 | HitCount | License | Poggit |
