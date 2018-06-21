@@ -7,8 +7,8 @@
  * |    // _ \ '_ \ / _` | | '__|
  * | |\ \  __/ |_) | (_| | | |
  * \_| \_\___| .__/ \__,_|_|_|
- * 			 | |
- * 			 |_| By @JackMD for PMMP
+ *           | |
+ *           |_| By @JackMD for PMMP
  *
  * Repair, a Repair plugin for PocketMine-MP.
  * Copyright (c) 2018 JackMD  < https://github.com/JackMD >
@@ -26,6 +26,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License v3.0 for more details.
+ *
  * You should have received a copy of the GNU General Public License v3.0
  * along with this program. If not, see
  * <https://opensource.org/licenses/GPL-3.0>.
@@ -44,25 +45,14 @@ use pocketmine\plugin\PluginBase;
 
 class Main extends PluginBase{
 	
-	/** @var Main $instance */
-	private static $instance;
-	
 	public function onEnable(): void{
 		if (!is_dir($this->getDataFolder())){
 			mkdir($this->getDataFolder());
 		}
-		$this->getServer()->getPluginManager()->registerEvents(new EventListener(), $this);
+		$this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
 		$this->getServer()->getCommandMap()->register("repair", new RepairCommand("repair", $this));
 		$this->saveDefaultConfig();
 		$this->getLogger()->info("Plugin Enabled.");
-		self::$instance = $this;
-	}
-	
-	/**
-	 * @return Main
-	 */
-	public static function getInstance(): Main{
-		return self::$instance;
 	}
 	
 	/**
