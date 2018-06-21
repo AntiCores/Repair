@@ -7,8 +7,8 @@
  * |    // _ \ '_ \ / _` | | '__|
  * | |\ \  __/ |_) | (_| | | |
  * \_| \_\___| .__/ \__,_|_|_|
- * 			 | |
- * 			 |_| By @JackMD for PMMP
+ *           | |
+ *           |_| By @JackMD for PMMP
  *
  * Repair, a Repair plugin for PocketMine-MP.
  * Copyright (c) 2018 JackMD  < https://github.com/JackMD >
@@ -26,6 +26,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License v3.0 for more details.
+ *
  * You should have received a copy of the GNU General Public License v3.0
  * along with this program. If not, see
  * <https://opensource.org/licenses/GPL-3.0>.
@@ -47,6 +48,18 @@ use pocketmine\utils\TextFormat;
 
 class EventListener implements Listener{
 	
+	/** @var Main $plugin */
+	private $plugin;
+	
+	/**
+	 * EventListener constructor.
+	 *
+	 * @param Main $plugin
+	 */
+	public function __construct(Main $plugin){
+		$this->plugin = $plugin;
+	}
+	
 	/**
 	 * @param PlayerInteractEvent $event
 	 */
@@ -54,7 +67,7 @@ class EventListener implements Listener{
 		$tile = $event->getBlock()->getLevel()->getTile(new Vector3($event->getBlock()->getFloorX(), $event->getBlock()->getFloorY(), $event->getBlock()->getFloorZ()));
 		if($tile instanceof Sign){
 			if(TextFormat::clean($tile->getText()[0], true) === "[Repair]"){
-				if(Main::getInstance()->getConfig()->get("enableRepairSigns") == true){
+				if($this->plugin->getConfig()->get("enableRepairSigns") == true){
 					$event->setCancelled(true);
 					if(!$event->getPlayer()->hasPermission("repair.sign.use")){
 						$event->getPlayer()->sendMessage(TextFormat::RED . "[Error]" . TextFormat::DARK_RED . " You don't have permissions to use this sign.");
@@ -67,7 +80,7 @@ class EventListener implements Listener{
 						}
 						$index = $event->getPlayer()->getInventory()->getHeldItemIndex();
 						$item = $event->getPlayer()->getInventory()->getItem($index);
-						if(Main::getInstance()->isRepairable($item)){
+						if($this->plugin->isRepairable($item)){
 							if($item->getDamage() > 0){
 								$event->getPlayer()->getInventory()->setItem($index, $item->setDamage(0));
 								$event->getPlayer()->sendMessage(TextFormat::GREEN . "Item successfully repaired.");
@@ -84,14 +97,14 @@ class EventListener implements Listener{
 							return;
 						}
 						foreach($event->getPlayer()->getInventory()->getContents() as $index => $item){
-							if(Main::getInstance()->isRepairable($item)){
+							if($this->plugin->isRepairable($item)){
 								if($item->getDamage() > 0){
 									$event->getPlayer()->getInventory()->setItem($index, $item->setDamage(0));
 								}
 							}
 						}
 						foreach($event->getPlayer()->getArmorInventory()->getContents() as $index => $item){
-							if(Main::getInstance()->isRepairable($item)){
+							if($this->plugin->isRepairable($item)){
 								if($item->getDamage() > 0){
 									$event->getPlayer()->getArmorInventory()->setItem($index, $item->setDamage(0));
 								}
@@ -118,7 +131,7 @@ class EventListener implements Listener{
 					$event->getPlayer()->sendMessage(TextFormat::RED . "[Error]" . TextFormat::DARK_RED . " You don't have permission to place repair signs.");
 					return;
 				}
-				if(Main::getInstance()->getConfig()->get("enableRepairSigns") == true){
+				if($this->plugin->getConfig()->get("enableRepairSigns") == true){
 					$event->setCancelled(true);
 					$event->getPlayer()->sendMessage(TextFormat::RED . "You don't have permissions to break this sign.");
 				}else{
@@ -140,7 +153,7 @@ class EventListener implements Listener{
 					$event->getPlayer()->sendMessage(TextFormat::RED . "[Error]" . TextFormat::DARK_RED . " You don't have permission to break repair signs.");
 					return;
 				}
-				if(Main::getInstance()->getConfig()->get("enableRepairSigns") == true){
+				if($this->plugin->getConfig()->get("enableRepairSigns") == true){
 					$event->getPlayer()->sendMessage(TextFormat::GREEN . "Repair sign successfully broken.");
 				}else{
 					$event->setCancelled(true);
@@ -159,7 +172,7 @@ class EventListener implements Listener{
 				$event->getPlayer()->sendMessage(TextFormat::RED . "[Error]" . TextFormat::DARK_RED . " You don't have permission to create repair signs.");
 				return;
 			}
-			if(Main::getInstance()->getConfig()->get("enableRepairSigns") == true){
+			if($this->plugin->getConfig()->get("enableRepairSigns") == true){
 				switch(strtolower($event->getLine(1))){
 					case "hand":
 						$event->setLine(1, "Hand");
