@@ -1,7 +1,7 @@
 name: Repair
 main: JackMD\Repair\Main
-version: 1.0.0
-api: [3.0.0-ALPHA12]
+version: 1.0.1
+api: [3.0.0]
 author: JackMD
 website: https://github.com/JackMD/Repair
 
