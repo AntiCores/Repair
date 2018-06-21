@@ -7,8 +7,8 @@
  * |    // _ \ '_ \ / _` | | '__|
  * | |\ \  __/ |_) | (_| | | |
  * \_| \_\___| .__/ \__,_|_|_|
- * 			 | |
- * 			 |_| By @JackMD for PMMP
+ *           | |
+ *           |_| By @JackMD for PMMP
  *
  * Repair, a Repair plugin for PocketMine-MP.
  * Copyright (c) 2018 JackMD  < https://github.com/JackMD >
@@ -26,6 +26,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License v3.0 for more details.
+ *
  * You should have received a copy of the GNU General Public License v3.0
  * along with this program. If not, see
  * <https://opensource.org/licenses/GPL-3.0>.
@@ -44,6 +45,9 @@ use pocketmine\utils\TextFormat;
 
 class RepairCommand extends PluginCommand{
 	
+	/** @var Main $plugin */
+	private $plugin;
+	
 	/**
 	 * RepairCommand constructor.
 	 *
@@ -56,6 +60,7 @@ class RepairCommand extends PluginCommand{
 		$this->setUsage("/repair [all:hand]");
 		$this->setAliases(["fix"]);
 		$this->setPermission("repair.command.use");
+		$this->plugin = $plugin;
 	}
 	
 	/**
@@ -86,7 +91,7 @@ class RepairCommand extends PluginCommand{
 				return true;
 			}
 			foreach($sender->getInventory()->getContents() as $index => $item){
-				if(Main::getInstance()->isRepairable($item)){
+				if($this->plugin->isRepairable($item)){
 					if($item->getDamage() > 0){
 						$sender->getInventory()->setItem($index, $item->setDamage(0));
 					}
@@ -95,7 +100,7 @@ class RepairCommand extends PluginCommand{
 			$m = TextFormat::GREEN . "All the tools in your inventory were repaired!";
 			if($sender->hasPermission("essentials.repair.armor")){
 				foreach($sender->getArmorInventory()->getContents() as $index => $item){
-					if(Main::getInstance()->isRepairable($item)){
+					if($this->plugin->isRepairable($item)){
 						if($item->getDamage() > 0){
 							$sender->getArmorInventory()->setItem($index, $item->setDamage(0));
 						}
@@ -110,7 +115,7 @@ class RepairCommand extends PluginCommand{
 			}
 			$index = $sender->getInventory()->getHeldItemIndex();
 			$item = $sender->getInventory()->getItem($index);
-			if(!Main::getInstance()->isRepairable($item)){
+			if(!$this->plugin->isRepairable($item)){
 				$sender->sendMessage(TextFormat::RED . "[Error] This item can't be repaired!");
 				return true;
 			}
