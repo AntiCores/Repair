@@ -3,7 +3,7 @@ main: JackMD\Repair\Main
 version: 1.0.1
 api: [3.0.0]
 author: JackMD
-website: https://github.com/JackMD/Repair
+website: https://github.com/AntiCores/Repair
 
 permissions:
   repair.command.use:
